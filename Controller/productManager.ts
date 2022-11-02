@@ -3,18 +3,18 @@ import * as rl from "readline-sync";
 export class ProductManagement {
   products: Product[] = [];
   showProducts() {
-    if(this.products.length <= 0){
-        console.log("--------------Không có dữ liệu--------------");
+    if (this.products.length <= 0) {
+      console.log("--------------Không có dữ liệu--------------");
     }
     console.table(this.products);
   }
-  findProduct(name:string) {
+  findProduct(name: string) {
     let flags = 0;
     this.products.forEach((product) => {
-       if(product.getName().includes(name)){
+      if (product.getName().includes(name)) {
         console.table(this.products);
         flags++;
-       }
+      }
     });
     if (flags === 0) {
       console.log("---------Không có dữ liệu phù hợp------------");
@@ -23,7 +23,7 @@ export class ProductManagement {
   addProduct() {
     let input = this.inputProduct();
     this.products.push(input);
-    console.log("----------------Thêm sản phẩm thành công------------")
+    console.log("----------------Thêm sản phẩm thành công------------");
   }
   UpdateProduct(id: number) {
     if (!this.checkProductId(id)) {
@@ -33,7 +33,7 @@ export class ProductManagement {
       this.products.forEach((product, index) => {
         if (product.getId() === id) {
           this.products[index] = newProduct;
-          console.log("--------------Đã sửa thành công------------")
+          console.log("--------------Đã sửa thành công------------");
           console.table(newProduct);
         }
       });
@@ -48,7 +48,7 @@ export class ProductManagement {
           this.products.splice(index, 1);
         }
       });
-      console.log("---------------Đã xóa thành công--------------")
+      console.log("---------------Đã xóa thành công--------------");
     }
   }
   checkProductId(id: number): boolean {
@@ -70,33 +70,31 @@ export class ProductManagement {
     return flag;
   }
   inputProduct() {
-    
     let id = +rl.question("Nhập ID : ");
-    while(!id){
-        id = +rl.question("Nhập lại ID : ");
+    while (!id) {
+      id = +rl.question("Nhập lại ID : ");
     }
     let name = rl.question("Nhập tên mặt hàng : ");
-    while(!name){
-        name = rl.question("Nhập lại tên mặt hàng : ");
+    while (!name) {
+      name = rl.question("Nhập lại tên mặt hàng : ");
     }
     let type = rl.question("Nhập loại hàng : ");
     while (!type) {
       type = rl.question("Nhập lại loại hàng : ");
     }
     let price = +rl.question("Nhập giá : ");
-    while(!price){
-        price = +rl.question("Nhập lại giá : ");
+    while (!price) {
+      price = +rl.question("Nhập lại giá : ");
     }
     let amount = +rl.question("Nhập số lượng : ");
-    while(!amount){
-        amount = +rl.question("Nhập lại số lượng : ");
+    while (!amount) {
+      amount = +rl.question("Nhập lại số lượng : ");
     }
     let date = new Date().toLocaleDateString();
     let describe = rl.question("Nhập mô tả mặt hàng : ");
-    while(!describe){
-        describe = rl.question("Nhập lại mô tả mặt hàng : ");
+    while (!describe) {
+      describe = rl.question("Nhập lại mô tả mặt hàng : ");
     }
     return new Product(id, name, type, price, amount, date, describe);
   }
 }
-
